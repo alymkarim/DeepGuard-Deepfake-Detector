@@ -1,0 +1,11 @@
+substitutions:
+  _REGION: europe-west1
+  _REPOSITORY: deepfake-training
+  _IMAGE: deepfake-trainer
+steps:
+- name: gcr.io/cloud-builders/docker
+  args: [build, -t, ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/${_IMAGE}:latest, .]
+- name: gcr.io/cloud-builders/docker
+  args: [push, ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/${_IMAGE}:latest]
+images:
+- ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/${_IMAGE}:latest

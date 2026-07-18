@@ -1,0 +1,32 @@
+from dataclasses import dataclass
+import os
+
+def e(n,d): return os.getenv(n,d)
+@dataclass(frozen=True)
+class Settings:
+    project_id:str=e("GCP_PROJECT_ID","")
+    region:str=e("GCP_REGION","europe-west1")
+    bucket:str=e("GCS_BUCKET","")
+    raw_real_prefix:str=e("RAW_REAL_PREFIX","raw/original")
+    raw_fake_prefix:str=e("RAW_FAKE_PREFIX","raw/Deepfakes")
+    manifest_prefix:str=e("MANIFEST_PREFIX","manifests")
+    frame_prefix:str=e("FRAME_PREFIX","frames")
+    output_prefix:str=e("OUTPUT_PREFIX","outputs")
+    seed:int=int(e("SEED","42"))
+    max_videos_per_class:int=int(e("MAX_VIDEOS_PER_CLASS","1000"))
+    train_ratio:float=float(e("TRAIN_RATIO","0.70"))
+    validation_ratio:float=float(e("VALIDATION_RATIO","0.15"))
+    test_ratio:float=float(e("TEST_RATIO","0.15"))
+    train_frames_per_video:int=int(e("TRAIN_FRAMES_PER_VIDEO","5"))
+    eval_frames_per_video:int=int(e("EVAL_FRAMES_PER_VIDEO","3"))
+    image_size:int=int(e("IMAGE_SIZE","224"))
+    batch_size:int=int(e("BATCH_SIZE","32"))
+    epochs:int=int(e("EPOCHS","5"))
+    fine_tune_epochs:int=int(e("FINE_TUNE_EPOCHS","3"))
+    learning_rate:float=float(e("LEARNING_RATE","0.001"))
+    fine_tune_learning_rate:float=float(e("FINE_TUNE_LEARNING_RATE","0.00001"))
+    num_workers:int=int(e("NUM_WORKERS","4"))
+    def validate(self):
+        if not self.bucket: raise ValueError("GCS_BUCKET is required")
+        if abs(self.train_ratio+self.validation_ratio+self.test_ratio-1)>1e-9: raise ValueError("Ratios must total 1")
+settings=Settings()
