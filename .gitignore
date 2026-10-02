@@ -1,6 +1,24 @@
+# Environments
 .venv/
-__pycache__/
+.venv-*/
 .env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/
+
+# Training data and outputs
 data/
 outputs/
+gcloud
+
+# Model weights are committed for the demo; other checkpoints are not.
 *.pth
+!best_model.pth
