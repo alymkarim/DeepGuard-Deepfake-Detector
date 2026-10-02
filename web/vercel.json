@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": "public",
+  "functions": {
+    "api/*.py": {
+      "runtime": "python3.12",
+      "maxDuration": 30,
+      "includeFiles": "assets/**"
+    }
+  }
+}
