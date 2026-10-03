@@ -1,0 +1,13 @@
+[project]
+name = "deepguard-api"
+version = "0.1.0"
+description = "ONNX inference endpoint for the DeepGuard deepfake detector"
+requires-python = ">=3.12"
+dependencies = [
+  "flask>=3.1,<4",
+  "numpy>=2.0,<3",
+  "onnxruntime>=1.20,<2",
+]
+
+[tool.vercel]
+entrypoint = "api.predict:app"
