@@ -6,6 +6,8 @@ frame by frame.
 The project covers the whole path: dataset handling in Cloud Storage, training on Vertex AI,
 a local Streamlit tool, and a small web demo that runs the model on Vercel.
 
+**Live demo:** https://deep-guard-deepfake-detector.vercel.app/
+
 ## What's here
 
 | Path | What it does |
